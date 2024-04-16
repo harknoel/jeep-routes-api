@@ -1,7 +1,6 @@
 package com.jeep.code.service;
 
 import com.jeep.code.model.JeepCode;
-import com.jeep.code.payload.JeepCodeAddDTO;
 import com.jeep.code.repository.JeepCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
