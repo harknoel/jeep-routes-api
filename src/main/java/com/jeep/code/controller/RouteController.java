@@ -1,8 +1,11 @@
 package com.jeep.code.controller;
 
+import com.jeep.code.payload.JeepCodeUpdateDTO;
 import com.jeep.code.payload.RouteRequestDTO;
 import com.jeep.code.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +18,13 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @GetMapping("/get")
-    public String getRoute(@RequestBody RouteRequestDTO routeRequestDTO) {
-        return routeService.getRoutes(routeRequestDTO);
+    @PostMapping("/get")
+    public ResponseEntity<String> getRoutes(@RequestBody RouteRequestDTO routeRequestDTO) {
+        String response = routeService.getRoutes(routeRequestDTO);
+        if (response != null) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while fetching routes.");
+        }
     }
 }
