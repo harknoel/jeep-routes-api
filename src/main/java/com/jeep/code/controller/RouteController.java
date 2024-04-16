@@ -13,4 +13,9 @@ public class RouteController {
     public RouteController(RouteService routeService) {
         this.routeService = routeService;
     }
+
+    @GetMapping("/{code}")
+    public String getRoute(@PathVariable String code) {
+        return routeService.getRoute(code);
+    }
 }
