@@ -1,5 +1,6 @@
 package com.jeep.code.controller;
 
+import com.jeep.code.payload.RouteRequestDTO;
 import com.jeep.code.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,8 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @GetMapping("/{code}")
-    public String getRoute(@PathVariable String code) {
-        return routeService.getRoute(code);
+    @GetMapping("/get")
+    public String getRoute(@RequestBody RouteRequestDTO routeRequestDTO) {
+        return routeService.getRoutes(routeRequestDTO);
     }
 }
