@@ -5,6 +5,7 @@ import com.jeep.code.repository.JeepCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,6 +13,10 @@ import java.util.Optional;
 public class JeepCodeService {
 
     private final JeepCodeRepository jeepCodeRepository;
+
+    public List<String> getAllJeepCodes() {
+        return jeepCodeRepository.findAllCodes();
+    }
 
     public boolean addCode(String code) {
         try {
