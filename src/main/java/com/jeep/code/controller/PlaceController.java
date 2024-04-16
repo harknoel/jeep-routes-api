@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/places")
 public class PlaceController {
@@ -15,6 +17,16 @@ public class PlaceController {
 
     public PlaceController(PlaceService placeService) {
         this.placeService = placeService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<String>> getAllPlaces() {
+        List<String> allJeepCodes = placeService.getAllPlaces();
+        if (allJeepCodes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(allJeepCodes);
+        }
     }
 
     @PostMapping("/add")
