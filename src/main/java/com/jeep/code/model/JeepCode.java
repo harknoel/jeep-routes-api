@@ -21,6 +21,6 @@ public class JeepCode {
 
     private String code;
 
-    @OneToMany(mappedBy = "jeepCode")
+    @OneToMany(mappedBy = "jeepCode", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Place> places;
 }
