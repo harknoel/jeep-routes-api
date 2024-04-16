@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/routes")
 public class RouteController {
@@ -17,6 +20,17 @@ public class RouteController {
     public RouteController(RouteService routeService) {
         this.routeService = routeService;
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<String>> getAllRoutes() {
+        List<String> routes = routeService.getAllRoutes();
+        if (routes != null && !routes.isEmpty()) {
+            return ResponseEntity.ok(routes);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonList("Error occurred while fetching routes."));
+        }
+    }
+
 
     @GetMapping("/get")
     public ResponseEntity<String> getRoutes(@RequestBody RouteRequestDTO routeRequestDTO) {

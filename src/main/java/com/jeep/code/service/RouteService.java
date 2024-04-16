@@ -7,6 +7,7 @@ import com.jeep.code.repository.JeepCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RouteService {
     private final JeepCodeRepository jeepCodeRepository;
+
+    public List<String> getAllRoutes() {
+        List<String> routesList = new ArrayList<>();
+
+        List<JeepCode> jeepCodes = jeepCodeRepository.findAll();
+        for (JeepCode jeepCode : jeepCodes) {
+            routesList.add(getRouteString(jeepCode));
+        }
+
+        return routesList;
+    }
 
     public String getRoutes(RouteRequestDTO routeRequestDTO) {
         List<String> codes = routeRequestDTO.getCodes();
