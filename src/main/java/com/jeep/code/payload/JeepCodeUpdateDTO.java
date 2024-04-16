@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JeepCodeUpdateDTO {
-    String code;
-    String newCode;
+    private String code;
+    private String newCode;
 }
