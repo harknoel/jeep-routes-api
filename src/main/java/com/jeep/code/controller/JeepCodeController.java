@@ -1,7 +1,9 @@
 package com.jeep.code.controller;
 
+import com.jeep.code.payload.JeepCodeAddDTO;
 import com.jeep.code.payload.JeepCodeUpdateDTO;
 import com.jeep.code.service.JeepCodeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,16 @@ public class JeepCodeController {
 
     public JeepCodeController(JeepCodeService jeepCodeService) {
         this.jeepCodeService = jeepCodeService;
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addCode(@RequestBody JeepCodeAddDTO jeepCodeAddDTO) {
+        boolean added = jeepCodeService.addCode(jeepCodeAddDTO.getCode());
+        if (added) {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Code added successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while adding code.");
+        }
     }
 
     @DeleteMapping("/remove/{name}")
