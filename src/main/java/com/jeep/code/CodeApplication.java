@@ -30,6 +30,13 @@ public class CodeApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		// Check if data is already present in the database
+		if (placeRepository.count() > 0 || jeepCodeRepository.count() > 0) {
+			System.out.println("Data is already present in the database. Skipping data initialization.");
+			return;
+		}
+
+		// Data map initialization
 		Map<String, List<String>> codeMap = Map.ofEntries(
 				entry("01A", List.of("Alpha", "Bravo", "Charlie", "Echo", "Golf")),
 				entry("02B", List.of("Alpha", "Delta", "Echo", "Foxtrot", "Golf")),
