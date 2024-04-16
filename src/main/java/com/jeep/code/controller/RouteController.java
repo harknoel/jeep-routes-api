@@ -18,7 +18,7 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @PostMapping("/get")
+    @GetMapping("/get")
     public ResponseEntity<String> getRoutes(@RequestBody RouteRequestDTO routeRequestDTO) {
         String response = routeService.getRoutes(routeRequestDTO);
         if (response != null) {
