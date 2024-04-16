@@ -7,6 +7,7 @@ import com.jeep.code.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,6 +15,10 @@ import java.util.Optional;
 public class PlaceService {
     private final JeepCodeRepository jeepCodeRepository;
     private final PlaceRepository placeRepository;
+
+    public List<String> getAllPlaces() {
+        return placeRepository.findAllUniquePlaceNames();
+    }
 
     public boolean addPlaceByCode(String code, String name) {
         Optional<JeepCode> optionalJeepCode = jeepCodeRepository.findByCode(code);
